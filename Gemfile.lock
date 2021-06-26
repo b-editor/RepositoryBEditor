@@ -77,7 +77,11 @@ GEM
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+<<<<<<< HEAD
     puma (5.3.2)
+=======
+    puma (4.3.8)
+>>>>>>> ebd2741cd0de4934fe31fa2669541da7854b3f5b
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
