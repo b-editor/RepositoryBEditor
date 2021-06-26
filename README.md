@@ -1,0 +1,2 @@
+# BackendBEditor
+BEditorの拡張機能ストア用バックエンドWebAPI
