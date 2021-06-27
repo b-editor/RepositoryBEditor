@@ -18,6 +18,9 @@ services:
       - db-volume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
+    ports:
+      - "3306:3306"
   redis:
     image: redis:5.0.5
     ports:
