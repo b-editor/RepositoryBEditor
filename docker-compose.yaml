@@ -12,6 +12,11 @@ services:
       - redis
     tty: true
     stdin_open: true
+    links:
+      - db
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
   db:
     image: mysql:5.7
     volumes:
