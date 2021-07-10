@@ -23,6 +23,9 @@ gem 'activesupport', '~>6.0.3.rc1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Authentication Management
+gem 'cancancan'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
