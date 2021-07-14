@@ -10,12 +10,18 @@ User.create!([
     name: 'admin',
     email: 'admin@example.com',
     password_digest: '$2a$10$HjQH2VBdguACJLyZHoVSs.yBZbwypqY3vUJGnxlWj94rmilWIuWzK',
-    usertype: 0
+    role: 1
   },
   {
     name: 'user',
     email: 'user@example.com',
     password_digest: '$2a$10$HjQH2VBdguACJLyZHoVSs.yBZbwypqY3vUJGnxlWj94rmilWIuWzK',
-    usertype: 1
+    role: 2
   },
-])
+  {
+    name: 'user',
+    email: 'user@example.com',
+    password_digest: '$2a$10$HjQH2VBdguACJLyZHoVSs.yBZbwypqY3vUJGnxlWj94rmilWIuWzK',
+    role: 3
+  },
+             ])
