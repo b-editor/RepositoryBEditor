@@ -9,7 +9,7 @@ module Session
     REDIS.mapped_hmset(
       token,
       'user_id' => user.id,
-      'user_type' => user.usertype
+      'user_role' => user.role,
     )
     #Config/Settings.ymlに設定された時間をtokenのタイムアウトに設定する
     REDIS.expire(token, Settings.session.timeout)

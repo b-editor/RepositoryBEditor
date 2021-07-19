@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 User.create!([
   {
     name: 'admin',
@@ -19,9 +20,37 @@ User.create!([
     role: 2
   },
   {
-    name: 'user',
-    email: 'user@example.com',
+    name: 'bob',
+    email: 'bob@example.com',
     password_digest: '$2a$10$HjQH2VBdguACJLyZHoVSs.yBZbwypqY3vUJGnxlWj94rmilWIuWzK',
     role: 3
   },
              ])
+Package.create!([
+                  {
+                    name: 'test',
+                    main_assembly: 'hello.c',
+                    user: User.find(1),
+                    homepage: 'https://example.com',
+                    description: 'Hello,World',
+                    description_short: 'Hello!!!!World!!!',
+                    uuid: 1,
+                  },
+                ])
+
+Version.create!([
+                  {
+                    download_url: 'https://example.com',
+                    update_note: 'first release',
+                    update_note_short: 'Hi,There!',
+                    release_datetime: Time.current,
+                    package: Package.find_by(:name => 'test')
+                  },
+                  {
+                    download_url: 'https://example.com/a',
+                    update_note: 'bug fix',
+                    update_note_short: 'hahaha',
+                    release_datetime: Time.current,
+                    package: Package.find_by(:name => 'test')
+                  },
+                ])
