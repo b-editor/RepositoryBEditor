@@ -10,6 +10,12 @@ class ApplicationController < ActionController::API
     render json: { error: 'unauthorized' }, status: :unauthorized if @session.nil? || @session.empty?
   end
 
+  def current_user
+    if @session
+      User.find(@session.fetch('user_id').to_i)
+    end
+  end
+
   private
     def set_session
         authenticate_with_http_token do |token, options|
