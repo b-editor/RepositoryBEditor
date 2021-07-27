@@ -9,6 +9,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    user = User.find(params[:id])
+    if user == current_user
+      @state = user.update(user_params)
+    elsif can? :update, current_user
+      @state = user.update(user_params)
+    else
+      @state = :unauthorized
+    end
+  end
+
+
   def create
     user = User.new(user_params)
     if user_ability_params == 1
@@ -25,6 +37,8 @@ class UsersController < ApplicationController
       user.destroy
     elsif can? :destroy, User
       user.destroy
+    else
+      @state = :unauthorized
     end
   end
 
