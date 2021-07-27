@@ -7,11 +7,23 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
       user ||= User.new # guest user (not logged in)
-      if user.admin?
+    #ユーザーの役職に応じた権限管理
+    # adminの場合
+    if user.admin?
         can :manage, :all
-      else
+        #デベロッパの場合
+    elsif user.developer?
         can :read, :all
-      end
+        can :create, Package
+        can :update, Package
+        can :destroy, Package
+        can :create, Version
+        can :destroy, Version
+        can :update, Version
+        #ただの人の場合
+    else
+        can :read, :all
+    end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
