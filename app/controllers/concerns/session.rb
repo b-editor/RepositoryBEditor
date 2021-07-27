@@ -5,6 +5,7 @@ module Session
     REDIS.hgetall(token)
   end
   def self.create(user)
+    #乱数生成
     token = SecureRandom.hex(64)
     REDIS.mapped_hmset(
       token,
