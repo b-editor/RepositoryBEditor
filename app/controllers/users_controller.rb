@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
     user = User.new(user_params)
     if user_ability_params == 1
       user.role = 3
