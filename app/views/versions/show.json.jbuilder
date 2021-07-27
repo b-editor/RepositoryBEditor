@@ -1,1 +1,1 @@
-json.partial! "versions/version", version: @version
+json.version @version
