@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_19_083505) do
+ActiveRecord::Schema.define(version: 2021_07_27_032644) do
 
   create_table "packages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "main_assembly", null: false
+    t.string "name", default: "untitled", null: false
+    t.string "main_assembly", default: "error", null: false
     t.string "homepage"
     t.string "description"
-    t.string "description_short", null: false
+    t.string "description_short", default: "error", null: false
     t.string "tags"
-    t.integer "uuid", null: false
-    t.string "licence"
+    t.integer "uuid", default: -1, null: false
+    t.string "license"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
