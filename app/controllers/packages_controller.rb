@@ -15,6 +15,17 @@ class PackagesController < ApplicationController
     #saveメソッドの返り値が結果なのでそれをそのままViewに渡す
     @state = package.save
   end
+  # 更新
+  def update
+    package = Package.find(params[:id])
+    if package.user == current_user
+      @state = package.update(package_params)
+    elsif can? :update, current_user
+      @state = package.update(user_params)
+    else
+      @state = :unauthorized
+    end
+  end
   # 削除
   def destroy
     package = Package.find(params[:id])
