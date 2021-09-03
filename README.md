@@ -6,6 +6,8 @@
 ![Size](https://img.shields.io/github/repo-size/b-editor/BackendBEditor)
 
 BEditorの拡張機能ストア用バックエンドWebAPIです  
+開発中のためまだ使用できません  
+
 ## Feature
  - BEditor用拡張機能の情報を取得
  - アカウント作成・認証・削除
