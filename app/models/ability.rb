@@ -8,21 +8,25 @@ class Ability
     #
       user ||= User.new # guest user (not logged in)
     #ユーザーの役職に応じた権限管理
-    # adminの場合
+    # 管理者(1)の場合
     if user.admin?
+        #自由自在
         can :manage, :all
-        #デベロッパの場合
+    #デベロッパ(3)の場合
     elsif user.developer?
-        can :read, :all
+        # パッケージとバージョンのCRUDを許可
+        can :read, Package
         can :create, Package
         can :update, Package
         can :destroy, Package
+        can :read, Version
         can :create, Version
         can :destroy, Version
         can :update, Version
-        #ただの人の場合
+    #ただの人(2)の場合
     else
-        can :read, :all
+        can :read, Package
+        can :read, Version
     end
     #
     # The first argument to `can` is the action you are giving the user
