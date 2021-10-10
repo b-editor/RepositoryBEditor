@@ -4,6 +4,7 @@ class AuthController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     @token = ''
+    @expires_in = Settings.session.timeout
     @status = :unauthorized
     if user && user.authenticate(params[:password])
       @token = Session.create(user)
