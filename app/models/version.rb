@@ -1,3 +1,3 @@
 class Version < ApplicationRecord
-  belongs_to :packages, dependent: :destroy
+  belongs_to :package, optional: true
 end

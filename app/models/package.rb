@@ -1,5 +1,5 @@
 class Package < ApplicationRecord
-  belongs_to :user, dependent: :destroy
-  has_many :versions
+  belongs_to :user
+  has_many :versions, dependent: :destroy
   serialize :tags, Array
 end
