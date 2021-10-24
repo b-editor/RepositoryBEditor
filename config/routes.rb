@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :auth, :only => [ :create, :update,:destroy ]
   resources :packages do
     resources :versions
-    end
+  end
+  post 'upload', to:'packages#uploading'
   post 'signin', to: 'auth#create'
   post 'signup', to: 'users#create'
   get 'getAccountInfo', to: 'users#me'
