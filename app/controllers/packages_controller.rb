@@ -37,6 +37,15 @@ class PackagesController < ApplicationController
       @state = :unauthorized
     end
   end
+  # パッケージをそのままアップロードする
+  def uploading
+    #uploaded = params[:package]
+    output_path = Rails.root.join('public/packages', params[:package].original_filename)
+    File.open("." + output_path.to_s, 'w+b') do |fp|
+      fp.write(params[:package].read)
+    end
+  end
+
   private
   #ストロングパラメータ
   def package_params
