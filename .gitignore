@@ -30,3 +30,5 @@ config/environments/*.local.yml
 # ignore redis temp files
 appendonly.aof
 /redis/appendonly.aof
+# ignore uploaded package files
+/app/public/*
