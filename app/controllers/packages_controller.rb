@@ -39,16 +39,24 @@ class PackagesController < ApplicationController
   end
   # パッケージをそのままアップロードする
   def uploading
-    #uploaded = params[:package]
+    #アップロードされた.bepkgファイルを取得
+    uploaded = params[:package]
+    # パッケージファイルの保存先パスを取得
     output_path = Rails.root.join('public/packages', params[:package].original_filename)
+    #上で指定した場所へパッケージファイルを保存する
     File.open("." + output_path.to_s, 'w+b') do |fp|
-      fp.write(params[:package].read)
+      fp.write(uploaded.read)
     end
+    unzip_and_parse_json
   end
 
   private
   #ストロングパラメータ
   def package_params
     params.permit(:name,:main_assembly,:homepage,:description,:description_short,:tags,:uuid,:license)
+  end
+
+  def unzip_and_parse_json
+
   end
 end
