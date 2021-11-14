@@ -1,3 +1,4 @@
+require 'json'
 class PackagesController < ApplicationController
   # 一覧表示
   def index
@@ -47,7 +48,20 @@ class PackagesController < ApplicationController
     File.open("." + output_path.to_s, 'w+b') do |fp|
       fp.write(uploaded.read)
     end
-    unzip_and_parse_json
+    # 解凍してパースされたPKGINFOをpkginfoという変数に入れとく
+    pkginfo = unzip_and_parse_json(Rails.root.join('app/public/packages',uploaded.original_filename))
+    # PKGINFOをもとにPackageを作成 (Mass Assignment脆弱性対策でとりあえずこんな感じで。)
+    Package.create(
+      name: pkginfo["name"],
+      main_assembly: pkginfo["main_assembly"],
+      homepage: pkginfo["homepage"],
+      description: pkginfo["description"],
+      description_short: pkginfo["description_short"],
+      tags: pkginfo["tags"],
+      uuid: pkginfo["id"],
+      license: pkginfo["license"],
+      user: current_user,
+    )
   end
 
   private
@@ -55,8 +69,14 @@ class PackagesController < ApplicationController
   def package_params
     params.permit(:name,:main_assembly,:homepage,:description,:description_short,:tags,:uuid,:license)
   end
-
-  def unzip_and_parse_json
-
+  #Zipファイルを解凍してパースする
+  def unzip_and_parse_json(zip_path)
+    packages_path = Rails.root.join('app/public/packages')
+    Zipper.unzipping(zip_path,Rails.root.join('app/public/packages'))
+    File.open(Rails.root.join('app/public/packages/tmp/PACKAGEINFO')) do |j|
+      @pkginfo = JSON.load(j)
+    end
+    File.delete(Rails.root.join('app/public/packages/tmp/PACKAGEINFO'))
+    @pkginfo
   end
 end
