@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/github/license/b-editor/BackendBEditor?style=for-the-badge&logo=appveyor)
 ![Size](https://img.shields.io/github/repo-size/b-editor/BackendBEditor?style=for-the-badge&logo=appveyor)
 ## 📖 ABOUT
-BEditorの拡張機能ストア用バックエンドWebAPIです
+BEditorの拡張機能ストア用バックエンドWebAPIです  
 開発中のためまだ使用できません
 
 ## 🌟 Feature

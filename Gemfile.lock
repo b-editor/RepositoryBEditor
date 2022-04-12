@@ -191,6 +191,7 @@ GEM
       rake (>= 0.8.1)
     ruby2_keywords (0.0.5)
     ruby_dep (1.5.0)
+    rubyzip (2.3.2)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -231,6 +232,7 @@ DEPENDENCIES
   rails (~> 6.0.2)
   redis-actionpack
   ruby-debug-ide
+  rubyzip
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

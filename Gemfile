@@ -53,3 +53,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mock_redis' # Redis のモック。テスト実行時に使用。
 gem 'config' # 環境ごとに yml の設定ファイルを作成可能。
+gem 'rubyzip'  # パッケージファイルを解凍して中のJsonをいじるために使うRailsでZipファイルを扱えるようにするGem。2009年の記事に載ってたGemなのにいま現役なのすごい。感動。

@@ -1,3 +1,4 @@
+require 'json'
 class PackagesController < ApplicationController
   # 一覧表示
   def index
@@ -37,9 +38,45 @@ class PackagesController < ApplicationController
       @state = :unauthorized
     end
   end
+  # パッケージをそのままアップロードする
+  def uploading
+    #アップロードされた.bepkgファイルを取得
+    uploaded = params[:package]
+    # パッケージファイルの保存先パスを取得
+    output_path = Rails.root.join('public/packages', params[:package].original_filename)
+    #上で指定した場所へパッケージファイルを保存する
+    File.open("." + output_path.to_s, 'w+b') do |fp|
+      fp.write(uploaded.read)
+    end
+    # 解凍してパースされたPKGINFOをpkginfoという変数に入れとく
+    pkginfo = unzip_and_parse_json(Rails.root.join('app/public/packages',uploaded.original_filename))
+    # PKGINFOをもとにPackageを作成 (Mass Assignment脆弱性対策でとりあえずこんな感じで。)
+    Package.create(
+      name: pkginfo["name"],
+      main_assembly: pkginfo["main_assembly"],
+      homepage: pkginfo["homepage"],
+      description: pkginfo["description"],
+      description_short: pkginfo["description_short"],
+      tags: pkginfo["tags"],
+      uuid: pkginfo["id"],
+      license: pkginfo["license"],
+      user: current_user,
+    )
+  end
+
   private
   #ストロングパラメータ
   def package_params
     params.permit(:name,:main_assembly,:homepage,:description,:description_short,:tags,:uuid,:license)
+  end
+  #Zipファイルを解凍してパースする
+  def unzip_and_parse_json(zip_path)
+    packages_path = Rails.root.join('app/public/packages')
+    Zipper.unzipping(zip_path,Rails.root.join('app/public/packages'))
+    File.open(Rails.root.join('app/public/packages/tmp/PACKAGEINFO')) do |j|
+      @pkginfo = JSON.load(j)
+    end
+    File.delete(Rails.root.join('app/public/packages/tmp/PACKAGEINFO'))
+    @pkginfo
   end
 end
